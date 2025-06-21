@@ -9,6 +9,7 @@ import { createLinkRoute } from "./routes/create-link";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import {getLinksRoute} from "@/infra/http/routes/get-links";
 import {getLinkRoute} from "@/infra/http/routes/get-link";
+import {exportLinksRoute} from "@/infra/http/routes/export-links";
 
 const server = fastify({
     logger: true
@@ -35,6 +36,7 @@ server.register(fastifySwaggerUi, {
     routePrefix: "/docs",
 });
 
+server.register(exportLinksRoute);
 server.register(getLinkRoute);
 server.register(getLinksRoute);
 server.register(createLinkRoute);
