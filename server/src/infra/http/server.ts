@@ -10,6 +10,7 @@ import { ZodTypeProvider } from "fastify-type-provider-zod";
 import {getLinksRoute} from "@/infra/http/routes/get-links";
 import {getLinkRoute} from "@/infra/http/routes/get-link";
 import {exportLinksRoute} from "@/infra/http/routes/export-links";
+import {getLinkByShortUrlRoute} from "@/infra/http/routes/get-link-by-short-url";
 
 const server = fastify({
     logger: true
@@ -19,6 +20,7 @@ server.setValidatorCompiler(validatorCompiler);
 server.setSerializerCompiler(serializerCompiler);
 
 server.register(fastifyCors, {
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     origin: "*",
 });
 
@@ -38,6 +40,7 @@ server.register(fastifySwaggerUi, {
 
 server.register(exportLinksRoute);
 server.register(getLinkRoute);
+server.register(getLinkByShortUrlRoute);
 server.register(getLinksRoute);
 server.register(createLinkRoute);
 server.register(deleteLinkRoute);
